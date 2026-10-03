@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="tl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Palakihin ang Lobo, Huwag ang Tupa</title>
+
+<!-- Markdown parser -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+
+<style>
+
+/* =========================================
+   GENERAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background: #f5f1e8;
+
+    color: #292929;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.hero {
+
+    background: #242424;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 55px 20px 45px;
+
+}
+
+
+.hero-wolf {
+
+    font-size: 55px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.hero h1 {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 32px;
+
+    line-height: 1.25;
+
+    margin: 0 auto 12px;
+
+    max-width: 700px;
+
+}
+
+
+.hero p {
+
+    margin: 0;
+
+    color: #cccccc;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.container {
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 30px 20px 70px;
+
+}
+
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
+.section-title {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 25px;
+
+    margin-top: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================================
+   CONTENTS
+========================================= */
+
+.contents {
+
+    background: #fffdf8;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,0.08);
+
+    margin-bottom: 35px;
+
+}
+
+
+.chapter-button {
+
+    width: 100%;
+
+    display: block;
+
+    text-align: left;
+
+    border: none;
+
+    border-bottom: 1px solid #e5e1d8;
+
+    background: transparent;
+
+    padding: 15px 12px;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+
+    color: #292929;
+
+    font-size: 15px;
+
+    transition: background 0.15s;
+
+}
+
+
+.chapter-button:first-child {
+
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+
+}
+
+
+.chapter-button:last-child {
+
+    border-bottom: none;
+
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+
+}
+
+
+.chapter-button:hover {
+
+    background: #f0ede5;
+
+}
+
+
+.chapter-number {
+
+    font-weight: bold;
+
+    margin-right: 8px;
+
+}
+
+
+.chapter-arrow {
+
+    float: right;
+
+    color: #888;
+
+}
+
+
+/* =========================================
+   INTRODUCTION
+========================================= */
+
+.introduction {
+
+    background: #fffdf8;
+
+    padding: 35px 30px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,0.08);
+
+}
+
+
+.introduction h1 {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 30px;
+
+    line-height: 1.3;
+
+    margin-top: 0;
+
+}
+
+
+.introduction h2 {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 25px;
+
+    margin-top: 40px;
+
+}
+
+
+.introduction h3 {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 20px;
+
+    margin-top: 30px;
+
+}
+
+
+.introduction p {
+
+    margin: 18px 0;
+
+}
+
+
+.introduction blockquote {
+
+    margin: 25px 0;
+
+    padding: 12px 20px;
+
+    border-left: 5px solid #555;
+
+    background: #f1eee5;
+
+    font-style: italic;
+
+}
+
+
+.introduction ul,
+.introduction ol {
+
+    padding-left: 28px;
+
+}
+
+
+.introduction hr {
+
+    border: none;
+
+    border-top: 1px solid #ddd;
+
+    margin: 40px 0;
+
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading {
+
+    text-align: center;
+
+    padding: 40px 10px;
+
+    color: #777;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error-box {
+
+    background: #fff0f0;
+
+    color: #8a0000;
+
+    border: 1px solid #e0aaaa;
+
+    padding: 20px;
+
+    border-radius: 8px;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    color: #888;
+
+    padding: 20px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .hero {
+
+        padding:
+            40px 15px 35px;
+
+    }
+
+
+    .hero-wolf {
+
+        font-size: 45px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .container {
+
+        padding:
+            20px 10px 50px;
+
+    }
+
+
+    .contents {
+
+        padding: 10px;
+
+    }
+
+
+    .introduction {
+
+        padding:
+            25px 20px;
+
+    }
+
+
+    .introduction h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .introduction h2 {
+
+        font-size: 22px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<header class="hero">
+
+    <div class="hero-wolf">
+        🐺
+    </div>
+
+    <h1>
+        PALAKIHIN ANG LOBO,<br>
+        HUWAG ANG TUPA
+    </h1>
+
+    <p>
+        Isang aklat tungkol sa pagtatanong,
+        pag-iisip, at pagpili ng sariling landas.
+    </p>
+
+</header>
+
+
+
+<main class="container">
+
+
+<!-- =========================================
+     CONTENTS
+========================================= -->
+
+<section>
+
+    <h2 class="section-title">
+        📖 Nilalaman
+    </h2>
+
+
+    <div class="contents">
+
+        <button
+            class="chapter-button"
+            onclick="openChapter(1)"
+        >
+
+            <span class="chapter-number">
+                Kabanata 1
+            </span>
+
+            <span>
+                Bakit?
+            </span>
+
+            <span class="chapter-arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="chapter-button"
+            onclick="openChapter(2)"
+        >
+
+            <span class="chapter-number">
+                Kabanata 2
+            </span>
+
+            <span>
+                Mag-isip Bago Maniwala
+            </span>
+
+            <span class="chapter-arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="chapter-button"
+            onclick="openChapter(3)"
+        >
+
+            <span class="chapter-number">
+                Kabanata 3
+            </span>
+
+            <span>
+                Ayos Lang Magbago Ng Isip
+            </span>
+
+            <span class="chapter-arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="chapter-button"
+            onclick="openChapter(4)"
+        >
+
+            <span class="chapter-number">
+                Kabanata 4
+            </span>
+
+            <span>
+                Matutong Tumayo Kahit Mag-isa
+            </span>
+
+            <span class="chapter-arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="chapter-button"
+            onclick="openChapter(5)"
+        >
+
+            <span class="chapter-number">
+                Kabanata 5
+            </span>
+
+            <span>
+                Matutong Magsabi Ng Hindi
+            </span>
+
+            <span class="chapter-arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <!--
+        ========================================
+        DAGDAGAN LANG NATIN ANG CHAPTERS
+        ========================================
+
+        Halimbawa:
+
+        <button
+            class="chapter-button"
+            onclick="openChapter(6)"
+        >
+            <span class="chapter-number">
+                Kabanata 6
+            </span>
+
+            <span>
+                Chapter 6
+            </span>
+
+            <span class="chapter-arrow">
+                →
+            </span>
+        </button>
+
+        -->
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     INTRODUCTION
+========================================= -->
+
+<section>
+
+    <h2 class="section-title">
+        📜 Introduction
+    </h2>
+
+
+    <article
+        id="introduction"
+        class="introduction"
+    >
+
+        <div class="loading">
+            Binabasa ang Introduction...
+        </div>
+
+    </article>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    🐺 Palakihin ang Lobo, Huwag ang Tupa
+
+</footer>
+
+
+
+<script>
+
+/*
+==================================================
+OPEN CHAPTER
+==================================================
+*/
+
+function openChapter(number) {
+
+    window.location.href =
+        `Chapters.html?chapter=${number}`;
+
+}
+
+
+/*
+==================================================
+LOAD INTRODUCTION
+==================================================
+*/
+
+async function loadIntroduction() {
+
+    const container =
+        document.getElementById(
+            "introduction"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "Introduction.md"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Hindi mahanap ang Introduction.md"
+            );
+
+        }
+
+
+        const markdown =
+            await response.text();
+
+
+        /*
+        Convert Markdown → HTML
+        */
+
+        container.innerHTML =
+            marked.parse(
+                markdown
+            );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="error-box">
+
+                <strong>
+                    Hindi ma-load ang Introduction.
+                </strong>
+
+                <p>
+                    Siguraduhing ang file na
+                    <code>Introduction.md</code>
+                    ay nasa parehong folder ng
+                    <code>index.html</code>.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/*
+==================================================
+START
+==================================================
+*/
+
+loadIntroduction();
+
+</script>
+
+
+</body>
+
+</html>

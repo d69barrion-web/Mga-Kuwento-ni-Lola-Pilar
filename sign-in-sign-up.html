@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent Sign In / Sign Up — AIWolf</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 430px;
+      padding: 28px;
+      background: #fff;
+      border: 1px solid #e1e5e9;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 25px;
+    }
+
+    .intro {
+      margin: 0 0 24px;
+      color: #5d6670;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #cbd2d9;
+      border-radius: 10px;
+      background: #f5f7f9;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      background: #244f3b;
+      border-color: #244f3b;
+      color: #fff;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd2d9;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+
+    input:focus,
+    button:focus {
+      outline: 3px solid #a9cbb8;
+      outline-offset: 2px;
+    }
+
+    .primary-button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      border: 0;
+      border-radius: 10px;
+      background: #244f3b;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #authStatus {
+      min-height: 24px;
+      margin: 16px 0 0;
+      color: #444;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    #authStatus.error {
+      color: #a32121;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 22px;
+      text-align: center;
+      color: #244f3b;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="auth-card">
+    <h1>🐺 Parent Access</h1>
+    <p class="intro">
+      Mag-sign in o gumawa ng parent account para buksan ang Parents Dashboard.
+    </p>
+
+    <div class="tabs" role="tablist" aria-label="Parent account">
+      <button
+        type="button"
+        id="signInTab"
+        class="tab-button active"
+        aria-selected="true">
+        Sign In
+      </button>
+
+      <button
+        type="button"
+        id="signUpTab"
+        class="tab-button"
+        aria-selected="false">
+        Sign Up
+      </button>
+    </div>
+
+    <form id="authForm">
+      <div id="nameField" class="hidden">
+        <label for="parentName">Parent name</label>
+        <input
+          id="parentName"
+          type="text"
+          autocomplete="name"
+          maxlength="100">
+      </div>
+
+      <label for="parentEmail">Email address</label>
+      <input
+        id="parentEmail"
+        type="email"
+        autocomplete="email"
+        required>
+
+      <label for="parentPassword">Password</label>
+      <input
+        id="parentPassword"
+        type="password"
+        autocomplete="current-password"
+        minlength="6"
+        required>
+
+      <div id="confirmPasswordField" class="hidden">
+        <label for="confirmPassword">Confirm password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          autocomplete="new-password"
+          minlength="6">
+      </div>
+
+      <button id="submitButton" class="primary-button" type="submit">
+        Sign In
+      </button>
+    </form>
+
+    <p id="authStatus" role="status" aria-live="polite"></p>
+
+    <a class="back-link" href="Chapters.html">
+      ← Bumalik sa Chapters
+    </a>
+  </main>
+
+  <!-- Firebase compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+  <script>
+        /*
+==================================================
+FIREBASE CONFIGURATION 
+==================================================
+*/
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA7dw8FdlLqMkxjl3oa3xcUZxhtow13kMk",
+    authDomain: "raise-a-wolf-not-a-sheep-8546e.firebaseapp.com",
+    projectId: "raise-a-wolf-not-a-sheep-8546e",
+    storageBucket: "raise-a-wolf-not-a-sheep-8546e.firebasestorage.app",
+    messagingSenderId: "694156521099",
+    appId: "1:694156521099:web:6383b03623b160886e2e8e",
+    measurementId: "G-RBL8QDPHZJ"
+};
+    let parentAuth = null;
+    let currentMode = "signin";
+
+    const authForm = document.getElementById("authForm");
+    const signInTab = document.getElementById("signInTab");
+    const signUpTab = document.getElementById("signUpTab");
+    const nameField = document.getElementById("nameField");
+    const confirmPasswordField =
+      document.getElementById("confirmPasswordField");
+
+    const parentNameInput = document.getElementById("parentName");
+    const emailInput = document.getElementById("parentEmail");
+    const passwordInput = document.getElementById("parentPassword");
+    const confirmPasswordInput =
+      document.getElementById("confirmPassword");
+
+    const submitButton = document.getElementById("submitButton");
+    const authStatus = document.getElementById("authStatus");
+
+    function setAuthStatus(message, isError = false) {
+      authStatus.textContent = message;
+      authStatus.classList.toggle("error", isError);
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+
+      const isSignUp = mode === "signup";
+
+      signInTab.classList.toggle("active", !isSignUp);
+      signUpTab.classList.toggle("active", isSignUp);
+
+      signInTab.setAttribute("aria-selected", String(!isSignUp));
+      signUpTab.setAttribute("aria-selected", String(isSignUp));
+
+      nameField.classList.toggle("hidden", !isSignUp);
+      confirmPasswordField.classList.toggle("hidden", !isSignUp);
+
+      parentNameInput.required = isSignUp;
+      confirmPasswordInput.required = isSignUp;
+
+      passwordInput.autocomplete =
+        isSignUp ? "new-password" : "current-password";
+
+      submitButton.textContent = isSignUp ? "Create Parent Account" : "Sign In";
+
+      setAuthStatus("");
+    }
+
+    function getFriendlyError(error) {
+      const code = error && error.code ? error.code : "";
+
+      switch (code) {
+        case "auth/invalid-email":
+          return "Hindi valid ang email address.";
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+        case "auth/invalid-credential":
+          return "Hindi tugma ang email at password.";
+        case "auth/email-already-in-use":
+          return "May account na gamit ang email na ito. Subukang mag-sign in.";
+        case "auth/weak-password":
+          return "Masyadong mahina ang password. Gumamit ng hindi bababa sa 6 na character.";
+        case "auth/network-request-failed":
+          return "Hindi makakonekta. Suriin ang internet connection.";
+        case "auth/too-many-requests":
+          return "Masyadong maraming pagtatangka. Maghintay muna bago subukan ulit.";
+        default:
+          return error && error.message
+            ? error.message
+            : "May naganap na hindi inaasahang error.";
+      }
+    }
+
+    function goToParentsDashboard() {
+      window.location.href = "Parents.html";
+    }
+
+    authForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      if (!parentAuth) {
+        setAuthStatus(
+          "Hindi handa ang Firebase. Suriin ang configuration at internet connection.",
+          true
+        );
+        return;
+      }
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      submitButton.disabled = true;
+      setAuthStatus(
+        currentMode === "signup"
+          ? "Ginagawa ang parent account..."
+          : "Sinusuri ang sign-in..."
+      );
+
+      try {
+        if (currentMode === "signup") {
+          const parentName = parentNameInput.value.trim();
+          const confirmPassword = confirmPasswordInput.value;
+
+          if (!parentName) {
+            throw new Error("Ilagay ang pangalan ng parent.");
+          }
+
+          if (password !== confirmPassword) {
+            throw new Error("Hindi magkapareho ang dalawang password.");
+          }
+
+          const credential =
+            await parentAuth.createUserWithEmailAndPassword(email, password);
+
+          // Optional display name in Firebase Authentication.
+          await credential.user.updateProfile({
+            displayName: parentName
+          });
+
+          setAuthStatus("Nagawa ang account. Binubuksan ang Parents Dashboard...");
+          goToParentsDashboard();
+
+        } else {
+          await parentAuth.signInWithEmailAndPassword(email, password);
+
+          setAuthStatus("Matagumpay ang sign-in. Binubuksan ang Parents Dashboard...");
+          goToParentsDashboard();
+        }
+
+      } catch (error) {
+        setAuthStatus(getFriendlyError(error), true);
+        submitButton.disabled = false;
+      }
+    });
+
+    signInTab.addEventListener("click", function() {
+      setMode("signin");
+    });
+
+    signUpTab.addEventListener("click", function() {
+      setMode("signup");
+    });
+
+    /*
+    ==================================================
+    INITIALIZE FIREBASE
+    ==================================================
+    */
+
+    try {
+      if (typeof firebase === "undefined") {
+        throw new Error("Hindi na-load ang Firebase SDK.");
+      }
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+
+      parentAuth = firebase.auth();
+
+      setAuthStatus("Handa na. Mag-sign in o gumawa ng account.");
+
+    } catch (error) {
+      setAuthStatus(
+        "Firebase initialization error: " + error.message,
+        true
+      );
+    }
+  </script>
+</body>
+</html>
