@@ -1,2 +1,2 @@
-<img src="Images/page5.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/page5.jpeg" style="width: 100%; max-width: 300px; height: auto;">
 Kring-kring! Tumunog ang kampanilya sa pinto...
