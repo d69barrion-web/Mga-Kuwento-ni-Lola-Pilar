@@ -163,7 +163,7 @@ Katigasan iyon ng ulo.
 
 Ang isang tunay na nag-iisip ay handang makinig.
 
-<img src="images/Chapter1/nagbabago_pananaw.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/luma_ideya.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 Kapag may nagbigay sa iyo ng magandang dahilan, pag-isipan mo ito.
 
