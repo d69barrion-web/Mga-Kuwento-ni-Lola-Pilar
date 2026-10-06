@@ -177,7 +177,7 @@ Nagtatanong ka ng **“Bakit?”** dahil gusto mong maunawaan.
 
 # ISANG MUNTING KUWENTO
 
-<img src="images/Chapter1/mia_anna.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/miaann_kuwento.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 Pauwi na galing paaralan sina Mia at ang kaibigan niyang si Anna.
 
