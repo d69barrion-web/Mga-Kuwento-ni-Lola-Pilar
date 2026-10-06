@@ -22,7 +22,7 @@ Ang isang maliit na bata ay maaaring magtanong nito nang dalawampung beses sa ii
 
 Minsan, nakakapagod din para sa mga matatanda.
 
-<img src="images/Chapter1/dahil_sinabi.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/Dahil_bata.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 “Dahil sinabi ko!”
 
