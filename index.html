@@ -1,0 +1,287 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Little Readers Publishing</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fffaf0;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      text-align: center;
+      padding: 28px 18px 20px;
+      background: #ffffff;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ff6b6b;
+      margin-bottom: 6px;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+      padding: 30px 20px 25px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    /* =========================
+       FOUR IMAGE BUTTONS
+    ========================= */
+
+    .menu {
+      width: 100%;
+      max-width: 900px;
+      margin: 10px auto 40px;
+      padding: 0 18px;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .image-button {
+      display: block;
+      text-decoration: none;
+      background: white;
+      border-radius: 22px;
+      overflow: hidden;
+
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .image-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.14);
+    }
+
+    .image-button:active {
+      transform: scale(0.97);
+    }
+
+    .image-button img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .button-title {
+      padding: 14px 10px 16px;
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #888;
+      font-size: 0.85rem;
+      background: #ffffff;
+    }
+
+    /* =========================
+       TABLET / DESKTOP
+    ========================= */
+
+    @media (min-width: 700px) {
+
+      .logo {
+        font-size: 2.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .menu {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .button-title {
+        font-size: 1rem;
+      }
+    }
+
+    /* =========================
+       SMALL PHONES
+    ========================= */
+
+    @media (max-width: 380px) {
+
+      .menu {
+        gap: 12px;
+        padding: 0 12px;
+      }
+
+      .button-title {
+        font-size: 0.9rem;
+        padding: 11px 5px 13px;
+      }
+
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header>
+    <div class="logo">📚 Little Readers</div>
+    <div class="tagline">
+      Stories that help children think, imagine, and grow.
+    </div>
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="hero">
+
+    <h1>Welcome, Young Readers! 🌟</h1>
+
+    <p>
+      Discover wonderful stories, creative ideas,
+      and books made especially for curious young minds.
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       FOUR IMAGE BUTTONS
+  ========================= -->
+
+  <main class="menu">
+
+    <!-- BUTTON 1 -->
+    <a href="MKLP/index.html" class="image-button">
+
+      <img
+        src="images/books.jpg"
+        alt="Children's books">
+
+      <div class="button-title">
+        📚 Our Books
+      </div>
+
+    </a>
+
+
+    <!-- BUTTON 2 -->
+    <a href="authors.html" class="image-button">
+
+      <img
+        src="images/authors.jpg"
+        alt="Children's book authors">
+
+      <div class="button-title">
+        ✍️ Our Authors
+      </div>
+
+    </a>
+
+
+    <!-- BUTTON 3 -->
+    <a href="illustrators.html" class="image-button">
+
+      <img
+        src="images/illustrators.jpg"
+        alt="Children's book illustrations">
+
+      <div class="button-title">
+        🎨 Our Illustrators
+      </div>
+
+    </a>
+
+
+    <!-- BUTTON 4 -->
+    <a href="about.html" class="image-button">
+
+      <img
+        src="images/about.jpg"
+        alt="About our publishing">
+
+      <div class="button-title">
+        🌈 About Us
+      </div>
+
+    </a>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+    © 2026 AIWolf Publishing
+    <br>
+    Growing young minds, one story at a time. ❤️
+  </footer>
+
+</body>
+</html>
+```
