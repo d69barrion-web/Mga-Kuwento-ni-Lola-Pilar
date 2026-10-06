@@ -149,7 +149,7 @@ Nagiging mapanuri ka.
 
 ## PERO MAY ISANG BITAG
 
-<img src="images/Chapter1/bitag.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/tigas_ulo.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 May isa pang uri ng taong nagtatanong.
 
