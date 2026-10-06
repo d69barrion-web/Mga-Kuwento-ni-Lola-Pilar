@@ -56,7 +56,7 @@ Maaari kang hindi sumang-ayon nang hindi nagiging bastos.
 
 Maaari mong kuwestiyunin ang isang ideya habang iginagalang pa rin ang taong nagsabi nito.
 
-<img src="images/Chapter1/dakilang_tanong.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/tuklas_bata.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 Sa katunayan, marami sa pinakamahahalagang tuklas sa kasaysayan ng tao ay nagsimula sa isang taong nagtanong ng bagay na hindi pa naisip itanong ng iba.
 
