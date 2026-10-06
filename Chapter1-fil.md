@@ -117,7 +117,7 @@ Ang kailangan mong gawin ay **mag-isip.**
 
 ### APAT NA SALITANG MAKAPAGPAPABAGO SA PARAAN NG PAG-IISIP MO
 
-<img src="images/Chapter1/apat_na_salita.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/salita_bata.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 Kapag nakaharap ka sa isang ideya, huwag kang huminto sa:
 
