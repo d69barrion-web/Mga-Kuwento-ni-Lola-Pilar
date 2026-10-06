@@ -1,0 +1,3021 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Palakihin ang Lobo, Huwag ang Tupa</title>
+
+<!-- Markdown parser -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: #f5f1e8;
+    color: #292929;
+    line-height: 1.75;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: #242424;
+    color: white;
+
+    padding: 10px 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.book-title {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.top-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.top-buttons button {
+    border: none;
+    border-radius: 6px;
+
+    padding: 7px 10px;
+
+    background: #444;
+    color: white;
+
+    cursor: pointer;
+}
+
+.top-buttons button:hover {
+    background: #555;
+}
+
+
+/* =========================================
+   READER
+========================================= */
+
+.reader {
+    max-width: 850px;
+    margin: 0 auto;
+
+    padding: 30px 20px 80px;
+}
+
+.chapter-info {
+    font-family: Arial, sans-serif;
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    color: #777;
+    font-size: 13px;
+}
+
+#chapterContent {
+    background: #fffdf8;
+
+    padding: 35px 30px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,0.08);
+}
+
+
+/* =========================================
+   MARKDOWN TYPOGRAPHY
+========================================= */
+
+#chapterContent h1 {
+    font-family: Arial, sans-serif;
+
+    font-size: 30px;
+    line-height: 1.25;
+
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#chapterContent h2 {
+    font-family: Arial, sans-serif;
+
+    font-size: 25px;
+
+    margin-top: 45px;
+}
+
+#chapterContent h3 {
+    font-family: Arial, sans-serif;
+
+    font-size: 20px;
+
+    margin-top: 35px;
+}
+
+#chapterContent p {
+    margin: 18px 0;
+}
+
+#chapterContent blockquote {
+    margin: 25px 0;
+
+    padding: 12px 20px;
+
+    border-left: 5px solid #555;
+
+    background: #f1eee5;
+
+    font-style: italic;
+}
+
+#chapterContent strong {
+    font-weight: bold;
+}
+
+#chapterContent ul,
+#chapterContent ol {
+    padding-left: 28px;
+}
+
+#chapterContent hr {
+    border: none;
+    border-top: 1px solid #ddd;
+
+    margin: 40px 0;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.chapter-navigation {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.chapter-navigation button {
+    flex: 1;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #333;
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.chapter-navigation button:hover {
+    background: #555;
+}
+
+.chapter-navigation button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   AIWOLF
+========================================= */
+
+.aiwolf {
+    margin-top: 45px;
+
+    background: #1f1f1f;
+    color: #f5f5f5;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.25);
+}
+
+.aiwolf-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.aiwolf-icon {
+    font-size: 35px;
+}
+
+.aiwolf-title {
+    font-family: Arial, sans-serif;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.aiwolf-intro {
+    color: #ccc;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   MODE BUTTONS
+========================================= */
+
+.mode-buttons {
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+}
+
+.mode-buttons button {
+    flex: 1;
+
+    padding: 9px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #444;
+    color: white;
+
+    cursor: pointer;
+}
+
+.mode-buttons button.active {
+    background: #777;
+}
+
+
+/* =========================================
+   SUGGESTED QUESTIONS
+========================================= */
+
+.suggestions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 15px;
+}
+
+.suggestions button {
+    border: 1px solid #555;
+
+    background: #2d2d2d;
+
+    color: #ddd;
+
+    border-radius: 20px;
+
+    padding: 7px 11px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.suggestions button:hover {
+    background: #444;
+}
+
+
+/* =========================================
+   CHAT
+========================================= */
+
+.chat {
+    max-height: 420px;
+
+    overflow-y: auto;
+
+    padding: 5px 0;
+}
+
+.message {
+    margin: 12px 0;
+
+    padding: 12px 14px;
+
+    border-radius: 9px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    white-space: pre-wrap;
+}
+
+.user-message {
+    background: #3b3b3b;
+
+    margin-left: 15%;
+}
+
+.ai-message {
+    background: #292929;
+
+    margin-right: 8%;
+
+    border-left: 3px solid #777;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.aiwolf-input {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.aiwolf-input textarea {
+    flex: 1;
+
+    resize: none;
+
+    min-height: 48px;
+
+    max-height: 130px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #555;
+
+    background: #2b2b2b;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    outline: none;
+}
+
+.aiwolf-input textarea:focus {
+    border-color: #888;
+}
+
+.aiwolf-input button {
+    width: 75px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #777;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.aiwolf-input button:hover {
+    background: #888;
+}
+
+.aiwolf-input button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.aiwolf-status {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    color: #999;
+
+    margin-top: 8px;
+
+    min-height: 18px;
+}
+
+
+
+
+/* =========================================
+   CONVERSATION STORAGE TOOLS
+========================================= */
+
+.conversation-tools {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.conversation-tools button {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #555;
+    border-radius: 7px;
+    background: #2d2d2d;
+    color: #ddd;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.conversation-tools button:hover {
+    background: #444;
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading {
+    text-align: center;
+
+    padding: 50px 10px;
+
+    color: #777;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error-box {
+    background: #fff0f0;
+
+    color: #8a0000;
+
+    border: 1px solid #e0aaaa;
+
+    padding: 20px;
+
+    border-radius: 8px;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    color: #888;
+
+    margin-top: 30px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .reader {
+        padding: 20px 10px 60px;
+    }
+
+    #chapterContent {
+        padding: 25px 20px;
+    }
+
+    #chapterContent h1 {
+        font-size: 27px;
+    }
+
+    #chapterContent h2 {
+        font-size: 22px;
+    }
+
+    .user-message {
+        margin-left: 5%;
+    }
+
+    .ai-message {
+        margin-right: 3%;
+    }
+
+    .chapter-navigation button {
+        font-size: 12px;
+    }
+
+    .conversation-tools {
+        flex-direction: column;
+    }
+
+}
+
+    /* =========================================
+   PARENT ACCOUNT
+========================================= */
+
+.parent-account {
+    margin: 18px 0;
+    padding: 16px;
+    background: #303030;
+    border: 1px solid #555;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.parent-account h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.parent-account p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.parent-account label {
+    display: block;
+    margin: 12px 0 5px;
+    font-size: 13px;
+}
+
+.parent-account input {
+    width: 100%;
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid #777;
+    border-radius: 6px;
+    background: #fff;
+    color: #222;
+    font-size: 16px;
+}
+
+.parent-account-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.parent-account-buttons button {
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 6px;
+    background: #555;
+    color: #fff;
+    cursor: pointer;
+}
+
+.parent-account-buttons button:hover {
+    background: #666;
+}
+
+.parent-account-note {
+    color: #ccc;
+    margin-bottom: 0;
+}
+
+    .eye-icon {
+    display: inline-block;
+    width: 16px;
+    height: 9px;
+    margin-right: 3px;
+    position: relative;
+    vertical-align: middle;
+}
+
+/* OPEN EYE */
+.open-eye {
+    border: 2px solid #222;
+    border-radius: 100% 0;
+    transform: rotate(45deg);
+}
+
+/* CLOSED EYE / EYELASH */
+.closed-eye {
+    width: 16px;
+    height: 8px;
+    border-top: 2px solid #222;
+    border-radius: 50%;
+}
+    
+</style>
+
+    <!-- Firebase Authentication (compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     TOP BAR
+========================================= -->
+
+<div class="topbar">
+
+    <div class="book-title">
+        🐺 Palakihin ang Lobo, Huwag ang Tupa
+    </div>
+
+    <div class="top-buttons">
+
+        <button onclick="goToContents()">
+            Contents
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     READER
+========================================= -->
+
+<main class="reader">
+
+    <div id="chapterInfo" class="chapter-info">
+        Naglo-load ng chapter...
+    </div>
+
+
+    <article id="chapterContent">
+
+        <div class="loading">
+            Binabasa ang chapter...
+        </div>
+
+    </article>
+
+
+    <!-- =====================================
+         CHAPTER NAVIGATION
+    ====================================== -->
+
+    <div class="chapter-navigation">
+
+        <button
+            id="previousButton"
+            onclick="previousChapter()">
+            ← Previous
+        </button>
+
+        <button
+            id="nextButton"
+            onclick="nextChapter()">
+            Next →
+        </button>
+
+    </div>
+
+
+    <!-- =====================================
+         AIWOLF
+    ====================================== -->
+
+    <section class="aiwolf">
+
+        <div class="mode-buttons">
+                <button type="button" onclick="window.location.href='sign-in-sign-up.html'">
+                    👨‍👩‍👧 Parents Dashboard
+                </button>
+        </div>
+
+        <div class="aiwolf-header">
+
+            <div class="aiwolf-icon">
+                🐺
+            </div>
+
+            <div class="aiwolf-title">
+                AIWolf
+            </div>
+
+        </div>
+
+
+        <div class="aiwolf-intro">
+
+            Kasama mo si AIWolf sa pagbabasa.
+            Maaari mo siyang tanungin tungkol sa
+            kabanata, humingi ng paliwanag, o gamitin
+            siya para mas malalim pang pag-isipan ang
+            mga ideya.
+
+        </div>
+
+        <!-- PARENT ACCOUNT -->
+<!--
+<div class="parent-account">
+    <h3>👨‍👩‍👧 Parent Account</h3>
+
+    <p id="parentAuthStatus">
+        Mag-sign in o gumawa ng parent account.
+    </p>
+
+    <label for="parentEmail">Email address</label>
+    <input
+        id="parentEmail"
+        type="email"
+        placeholder="your@email.com"
+        autocomplete="email"
+    >
+
+    <label for="parentPassword">Password</label>
+    <input
+        id="parentPassword"
+        type="password"
+        placeholder="At least 6 characters"
+        autocomplete="current-password"
+    >
+
+    <div class="parent-account-buttons">
+        <button type="button" onclick="parentSignUp()">
+            Create account
+        </button>
+
+        <button type="button" onclick="parentSignIn()">
+            Sign in
+        </button>
+
+        <button
+            type="button"
+            id="parentSignOutButton"
+            onclick="parentSignOut()"
+            hidden
+        >
+            Sign out
+        </button>
+
+        <button
+            type="button"
+            onclick="window.location.href='Chapters.html'">
+             ← Back to Chapters 
+        </button>
+    </div>
+
+    <p class="parent-account-note">
+        Parent account pa lamang ito. Hindi pa nakakabit ang child profiles
+        at cloud conversation history.
+    </p>
+</div>
+-->
+    <!-- CHILD PROFILE -->
+<!--
+<div class="parent-account" id="childProfilePanel" hidden>
+
+```
+-->
+<!-- AIWolf Credits -->
+<!--
+<div id="aiWolfCreditsBox" style="
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #303030;
+">
+    <h3 style="margin-top: 0;">🐺 AIWolf Credits</h3>
+
+    <div>
+        Starting Credits:
+        <strong id="aiWolfStartingCredits">$0.00</strong>
+    </div>
+
+    <div>
+        Used:
+        <strong id="aiWolfTotalCost">$0.00</strong>
+    </div>
+
+    <div>
+        Estimated Remaining:
+        <strong id="aiWolfRemainingCredits">$0.00</strong>
+    </div>
+</div>
+    
+<h3>👧 Child Profile</h3>
+
+<p>
+    Gumawa ng profile gamit ang palayaw.
+    Huwag munang ilagay ang buong pangalan o birthday.
+</p>
+
+<label for="childNickname">Palayaw</label>
+
+<input
+    id="childNickname"
+    type="text"
+    maxlength="40"
+    placeholder="Hal. Angel"
+>
+
+<label for="childGrade">Grade level (optional)</label>
+
+<input
+    id="childGrade"
+    type="text"
+    maxlength="30"
+    placeholder="Hal. Grade 5"
+>
+
+<div class="parent-account-buttons">
+    <button 
+    type="button"
+    id="createChildButton"
+    onclick="createChildProfile()"
+>
+    Create child profile
+    </button>
+</div>
+
+<p
+    id="childProfileStatus"
+    aria-live="polite"
+></p>
+
+-->
+<!-- ACTIVE CHILD -->
+
+<label for="activeChildSelect">
+    Active child:
+</label>
+
+<select id="activeChildSelect">
+<!--
+    <option value="">
+        -- Select a child --
+    </option>
+-->
+</select>
+<!--
+<div id="childProfileList"></div>
+-->
+<!-- PARENT CONVERSATION VIEWER -->
+<!--
+<div id="parentConversationViewer" style="margin-top: 25px;">
+
+    <h3>🐺 AIWolf Learning History</h3>
+
+    <p
+        id="conversationViewerStatus"
+        aria-live="polite"
+    >
+        Pumili ng child para makita ang learning history.
+    </p>
+
+    
+<div class="parent-account-buttons">  
+    <button
+        type="button"
+        id="refreshConversationButton"
+    >
+        🔄 Refresh history
+    </button>
+</div>
+
+    <label for="chapterFilter">
+         Filter by chapter:
+    </label>
+
+    <select id="chapterFilter">
+         <option value="all">All chapters</option>
+    </select>
+
+    <div id="conversationList"></div>
+
+</div>
+```
+
+</div>
+-->
+
+        <!-- MODE -->
+
+        <div class="mode-buttons">
+
+            <button
+                id="childModeButton"
+                class="active"
+                onclick="setMode('child')">
+
+                🧒 Child Mode
+
+            </button>
+
+<!--
+            <button
+                id="parentModeButton"
+                onclick="setMode('parent')">
+
+                👨‍👩‍👧 Parent Mode
+
+            </button>
+-->
+        </div>
+
+
+        <!-- SUGGESTIONS -->
+
+        <div class="suggestions">
+
+            <button onclick="askSuggested(
+                'Ano ang pangunahing ideya ng chapter na ito?'
+            )">
+                Main idea
+            </button>
+
+
+            <button onclick="askSuggested(
+                'Ipaliwanag mo ito nang simple.'
+            )">
+                Explain simply
+            </button>
+
+
+            <button onclick="askSuggested(
+                'Bigyan mo ako ng halimbawa sa totoong buhay.'
+            )">
+                Give example
+            </button>
+
+
+            <button onclick="askSuggested(
+                'Bigyan mo ako ng tanong na makapagpapaisip sa akin.'
+            )">
+                Make me think
+            </button>
+
+
+            <button onclick="askSuggested(
+                'Ano ang ibig sabihin ng lobo sa chapter na ito?'
+            )">
+                What does wolf mean?
+            </button>
+
+        </div>
+
+
+        <!-- CHAT -->
+
+        <div
+            id="chat"
+            class="chat">
+        </div>
+
+
+        <!-- INPUT -->
+
+        <div class="aiwolf-input">
+
+            <textarea
+                id="questionInput"
+                placeholder="Tanungin si AIWolf..."
+                onkeydown="handleInputKey(event)">
+            </textarea>
+
+
+            <button
+                id="sendButton"
+                onclick="sendQuestion()">
+
+                Send
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="aiwolfStatus"
+            class="aiwolf-status">
+        </div>
+
+
+        <div class="conversation-tools">
+            <button type="button" onclick="downloadConversation()">
+                💾 Save Conversation
+            </button>
+            <button type="button" onclick="clearSavedConversation()">
+                🗑 Clear Saved Chat
+            </button>
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        🐺 AIWolf — Reading Companion
+
+    </footer>
+
+</main>
+
+
+<script>
+
+/*
+==================================================
+CHAPTER CONFIGURATION
+==================================================
+*/
+
+/*
+Maximum number of chapters.
+
+Palitan lamang ito kapag nadagdagan ang
+mga chapter ng libro.
+*/
+
+const TOTAL_CHAPTERS = 43;
+
+
+/*
+Current chapter
+*/
+
+let currentChapter = 1;
+
+
+/*
+Current chapter markdown text
+*/
+
+let currentChapterText = "";
+
+
+/*
+AIWolf mode
+*/
+
+let currentMode = "child";
+
+    /*
+==================================================
+FIREBASE PARENT AUTHENTICATION
+==================================================
+*/
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA7dw8FdlLqMkxjl3oa3xcUZxhtow13kMk",
+    authDomain: "raise-a-wolf-not-a-sheep-8546e.firebaseapp.com",
+    projectId: "raise-a-wolf-not-a-sheep-8546e",
+    storageBucket: "raise-a-wolf-not-a-sheep-8546e.firebasestorage.app",
+    messagingSenderId: "694156521099",
+    appId: "1:694156521099:web:6383b03623b160886e2e8e",
+    measurementId: "G-RBL8QDPHZJ"
+};
+
+let parentAuth = null;
+let parentDb = null;
+
+function loadAIWolfCredits() {
+
+    if (!parentDb) return;
+
+    parentDb
+        .collection("_aiwolf")
+        .doc("usage")
+        .onSnapshot(
+            function (snapshot) {
+
+                if (!snapshot.exists) {
+                    return;
+                }
+
+                const data = snapshot.data();
+
+                document.getElementById(
+                    "aiWolfStartingCredits"
+                ).textContent =
+                    "$" +
+                    Number(
+                        data.startingCredits || 0
+                    ).toFixed(2);
+
+                document.getElementById(
+                    "aiWolfTotalCost"
+                ).textContent =
+                    "$" +
+                    Number(
+                        data.totalCost || 0
+                    ).toFixed(4);
+
+                document.getElementById(
+                    "aiWolfRemainingCredits"
+                ).textContent =
+                    "$" +
+                    Number(
+                        data.estimatedRemainingCredits || 0
+                    ).toFixed(2);
+
+            },
+            function (error) {
+
+                alert(
+                    "AIWolf Credits Error:\n\n" +
+                    error.message
+                );
+
+            }
+        );
+}
+
+function setParentAuthStatus(message) {
+    const status = document.getElementById("parentAuthStatus");
+
+    if (status) {
+        status.textContent = message;
+    }
+}
+
+function getParentEmail() {
+    return document.getElementById("parentEmail").value.trim();
+}
+
+function getParentPassword() {
+    return document.getElementById("parentPassword").value;
+}
+
+function showParentSignedIn(user) {
+    const signOutButton =
+        document.getElementById("parentSignOutButton");
+
+    if (user) {
+        setParentAuthStatus(
+            "Naka-sign in bilang: " + (user.email || "Parent account")
+        );
+
+        signOutButton.hidden = false;
+    } else {
+        setParentAuthStatus(
+            "Mag-sign in o gumawa ng parent account."
+        );
+
+        signOutButton.hidden = true;
+    }
+}
+
+async function connectParentProfile(user) {
+    if (!user) return;
+
+    try {
+        setParentAuthStatus("Naka-sign in. Kinokonekta ang parent profile...");
+
+        const idToken = await user.getIdToken();
+
+        const response = await fetch(
+            "https://mychatbot-ct9m.onrender.com/api/parent/profile",
+            {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${idToken}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: question,
+                chapter: currentChapter,
+                mode: currentMode,
+                chapterText: currentChapterText,
+                childId: childId
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Hindi makakonekta sa parent profile."
+            );
+        }
+
+        setParentAuthStatus(
+            "Naka-sign in bilang: " +
+            (user.email || "Parent account") +
+            " — Parent profile connected."
+        );
+    } catch (error) {
+        console.error("Parent profile connection error:", error);
+
+        setParentAuthStatus(
+            "Naka-sign in bilang: " +
+            (user.email || "Parent account") +
+            " — Hindi pa nakakonekta ang profile: " +
+            error.message
+        );
+    }
+}
+
+async function parentSignUp() {
+    if (!parentAuth) {
+        setParentAuthStatus(
+            "Hindi pa handa ang Firebase. I-refresh ang page at subukan muli."
+        );
+        return;
+    }
+
+    const email = getParentEmail();
+    const password = getParentPassword();
+
+    if (!email || !password) {
+        setParentAuthStatus("Ilagay ang email at password.");
+        return;
+    }
+
+    if (password.length < 6) {
+        setParentAuthStatus(
+            "Dapat ay hindi bababa sa 6 na characters ang password."
+        );
+        return;
+    }
+
+    try {
+        setParentAuthStatus("Ginagawa ang parent account...");
+
+        const result =
+            await parentAuth.createUserWithEmailAndPassword(
+                email,
+                password
+            );
+
+        showParentSignedIn(result.user);
+document.getElementById("parentPassword").value = "";
+await connectParentProfile(result.user);
+    } catch (error) {
+        setParentAuthStatus(
+            "Hindi nagawa ang account: " + error.message
+        );
+    }
+}
+
+async function parentSignIn() {
+    if (!parentAuth) {
+        setParentAuthStatus(
+            "Hindi pa handa ang Firebase. I-refresh ang page at subukan muli."
+        );
+        return;
+    }
+
+    const email = getParentEmail();
+    const password = getParentPassword();
+
+    if (!email || !password) {
+        setParentAuthStatus("Ilagay ang email at password.");
+        return;
+    }
+
+    try {
+        setParentAuthStatus("Nag-sign in...");
+
+        const result =
+            await parentAuth.signInWithEmailAndPassword(
+                email,
+                password
+            );
+
+        showParentSignedIn(result.user);
+document.getElementById("parentPassword").value = "";
+await connectParentProfile(result.user);
+    } catch (error) {
+        setParentAuthStatus(
+            "Hindi makapag-sign in: " + error.message
+        );
+    }
+}
+
+async function parentSignOut() {
+    if (!parentAuth) return;
+
+    try {
+        await parentAuth.signOut();
+        showParentSignedIn(null);
+    } catch (error) {
+        setParentAuthStatus(
+            "Hindi makapag-sign out: " + error.message
+        );
+    }
+}
+
+    async function createChildProfile() {
+    const user = parentAuth && parentAuth.currentUser;
+
+    if (!user) {
+        setChildProfileStatus("Mag-sign in muna bilang parent.");
+        return;
+    }
+
+    const nickname =
+        document.getElementById("childNickname").value.trim();
+
+    const grade =
+        document.getElementById("childGrade").value.trim();
+
+    if (!nickname) {
+        setChildProfileStatus("Ilagay muna ang palayaw.");
+        return;
+    }
+
+    const button = document.getElementById("createChildButton");
+    button.disabled = true;
+    setChildProfileStatus("Ginagawa ang child profile...");
+
+    try {
+        const idToken = await user.getIdToken();
+
+        const response = await fetch(
+            "https://mychatbot-ct9m.onrender.com/api/parent/children",
+            {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${idToken}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ nickname, grade })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Hindi nagawa ang profile.");
+        }
+
+        document.getElementById("childNickname").value = "";
+        document.getElementById("childGrade").value = "";
+
+        setChildProfileStatus("Nagawa na ang child profile!");
+        await loadChildProfiles();
+    } catch (error) {
+        console.error("Create child profile error:", error);
+        setChildProfileStatus("Error: " + error.message);
+    } finally {
+        button.disabled = false;
+    }
+}
+
+
+async function loadChildProfiles() {
+    const user = parentAuth && parentAuth.currentUser;
+    if (!user) return;
+
+    const list = document.getElementById("childProfileList");
+    const select = document.getElementById("activeChildSelect");
+
+    try {
+        const idToken = await user.getIdToken();
+
+        const response = await fetch(
+            "https://mychatbot-ct9m.onrender.com/api/parent/children",
+            {
+                headers: {
+                    "Authorization": `Bearer ${idToken}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Hindi ma-load ang profiles.");
+        }
+
+        // Clear the current list and dropdown options
+        list.innerHTML = "";
+        select.innerHTML = "";
+
+        // Default dropdown option
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "-- Select a child --";
+        select.appendChild(placeholder);
+
+        if (!data.children || !data.children.length) {
+            list.textContent = "Wala pang child profile.";
+            return;
+        }
+
+        data.children.forEach(child => {
+            // Add child to the visible profile list
+            const item = document.createElement("p");
+            item.textContent =
+                child.nickname +
+                (child.grade ? " — " + child.grade : "");
+            list.appendChild(item);
+
+            // Add child to the dropdown
+            const option = document.createElement("option");
+            option.value = child.childId;
+            option.textContent =
+                child.nickname +
+                (child.grade ? " — " + child.grade : "");
+            select.appendChild(option);
+        });
+
+    } catch (error) {
+        console.error("Load child profiles error:", error);
+        setChildProfileStatus(
+            "Hindi ma-load ang profiles: " + error.message
+        );
+    }
+}
+
+
+function setChildProfileStatus(message) {
+    const status = document.getElementById("childProfileStatus");
+    if (status) status.textContent = message;
+}
+
+/*
+Initialize Firebase after the page loads.
+*/
+
+try {
+    if (typeof firebase !== "undefined") {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        parentAuth = firebase.auth();
+        parentDb = firebase.firestore();
+
+        parentAuth.onAuthStateChanged(function (user) {
+    showParentSignedIn(user);
+
+    const panel = document.getElementById("childProfilePanel");
+    if (panel) panel.hidden = !user;
+
+    if (user) {
+        loadChildProfiles();
+        loadAIWolfCredits();
+    }
+});
+    } else {
+        setParentAuthStatus(
+            "Hindi na-load ang Firebase SDK. Suriin ang internet connection."
+        );
+    }
+} catch (error) {
+    setParentAuthStatus(
+        "Firebase initialization error: " + error.message
+    );
+}
+
+/*
+==================================================
+GET CHAPTER NUMBER FROM URL
+==================================================
+*/
+
+function getChapterNumber() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const value =
+        parseInt(
+            params.get("chapter"),
+            10
+        );
+
+
+    /*
+    Kung walang chapter parameter,
+    default sa Chapter 1.
+    */
+
+    if (
+        isNaN(value) ||
+        value < 1 ||
+        value > TOTAL_CHAPTERS
+    ) {
+
+        return 1;
+
+    }
+
+
+    return value;
+
+}
+
+
+/*
+==================================================
+LOAD CHAPTER
+==================================================
+*/
+
+async function loadChapter() {
+
+    currentChapter =
+        getChapterNumber();
+
+
+    const mdFile =
+        `Page${currentChapter}-fil.md`;
+
+
+    const content =
+        document.getElementById(
+            "chapterContent"
+        );
+
+
+    const info =
+        document.getElementById(
+            "chapterInfo"
+        );
+
+
+    content.innerHTML = `
+        <div class="loading">
+            Binabasa ang Chapter ${currentChapter}...
+        </div>
+    `;
+
+
+    info.textContent =
+        `Chapter ${currentChapter} of ${TOTAL_CHAPTERS}`;
+
+
+    try {
+
+        const response =
+            await fetch(mdFile);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Hindi mahanap ang ${mdFile}`
+            );
+
+        }
+
+
+        currentChapterText =
+            await response.text();
+
+
+        /*
+        Render Markdown
+        */
+
+        content.innerHTML =
+            marked.parse(
+                currentChapterText
+            );
+
+
+        /*
+        Update navigation
+        */
+
+        updateNavigation();
+
+
+        /*
+        Update browser title
+        */
+
+        updatePageTitle();
+
+
+        /*
+        Clear previous AIWolf conversation
+        */
+
+        clearChat();
+
+
+        /*
+        Scroll to top
+        */
+
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        content.innerHTML = `
+            <div class="error-box">
+
+                <strong>
+                    Hindi ma-load ang chapter.
+                </strong>
+
+                <p>
+                    Sinubukang basahin:
+                    <br>
+                    <code>${mdFile}</code>
+                </p>
+
+                <p>
+                    Siguraduhing nasa tamang folder
+                    ang Markdown file.
+                </p>
+
+            </div>
+        `;
+
+        info.textContent =
+            `Chapter ${currentChapter}`;
+
+    }
+
+}
+
+
+/*
+==================================================
+PAGE TITLE
+==================================================
+*/
+
+function updatePageTitle() {
+
+    document.title =
+        `Chapter ${currentChapter} — Palakihin ang Lobo`;
+
+}
+
+
+/*
+==================================================
+NAVIGATION
+==================================================
+*/
+
+function updateNavigation() {
+
+    const previous =
+        document.getElementById(
+            "previousButton"
+        );
+
+    const next =
+        document.getElementById(
+            "nextButton"
+        );
+
+
+    previous.disabled =
+        currentChapter <= 1;
+
+
+    next.disabled =
+        currentChapter >= TOTAL_CHAPTERS;
+
+}
+
+
+/*
+==================================================
+OPEN CHAPTER
+==================================================
+*/
+
+function openChapter(number) {
+
+    if (
+        number < 1 ||
+        number > TOTAL_CHAPTERS
+    ) {
+
+        return;
+
+    }
+
+
+    window.location.href =
+        `Chapters.html?chapter=${number}`;
+
+}
+
+
+/*
+==================================================
+PREVIOUS
+==================================================
+*/
+
+function previousChapter() {
+
+    if (currentChapter > 1) {
+
+        openChapter(
+            currentChapter - 1
+        );
+
+    }
+
+}
+
+
+/*
+==================================================
+NEXT
+==================================================
+*/
+
+function nextChapter() {
+
+    if (
+        currentChapter < TOTAL_CHAPTERS
+    ) {
+
+        openChapter(
+            currentChapter + 1
+        );
+
+    }
+
+}
+
+
+/*
+==================================================
+CONTENTS
+==================================================
+*/
+
+function goToContents() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/*
+==================================================
+AIWOLF MODE
+==================================================
+*/
+
+function setMode(mode) {
+
+    currentMode =
+        mode;
+
+
+    const childButton =
+        document.getElementById(
+            "childModeButton"
+        );
+
+
+    const parentButton =
+        document.getElementById(
+            "parentModeButton"
+        );
+
+
+    childButton.classList.toggle(
+        "active",
+        mode === "child"
+    );
+
+
+    parentButton.classList.toggle(
+        "active",
+        mode === "parent"
+    );
+
+
+    setStatus(
+        mode === "child"
+            ? "Child Mode"
+            : "Parent Mode"
+    );
+
+}
+
+
+/*
+==================================================
+AIWOLF CHAT
+==================================================
+*/
+
+function addMessage(
+    text,
+    type
+) {
+
+    const chat =
+        document.getElementById(
+            "chat"
+        );
+
+
+    const message =
+        document.createElement(
+            "div"
+        );
+
+
+    message.className =
+        `message ${type}`;
+
+
+    message.textContent =
+        text;
+
+
+    chat.appendChild(
+        message
+    );
+
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/*
+==================================================
+CLEAR CHAT
+==================================================
+*/
+
+function clearChat() {
+
+    const chat =
+        document.getElementById(
+            "chat"
+        );
+
+
+    chat.innerHTML = "";
+
+
+    setStatus(
+        `AIWolf is ready — Chapter ${currentChapter}`
+    );
+
+
+    loadSavedConversation();
+
+}
+
+
+/*
+==================================================
+CONVERSATION STORAGE
+==================================================
+*/
+
+function getConversationKey() {
+
+    return `aiwolf_conversation_chapter_${currentChapter}`;
+
+}
+
+
+function getSavedConversation() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                getConversationKey()
+            );
+
+
+        if (!saved) {
+            return [];
+        }
+
+
+        const parsed =
+            JSON.parse(saved);
+
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    } catch (error) {
+
+        console.error(
+            "Conversation load error:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+function saveConversationMessage(
+    role,
+    text
+) {
+
+    try {
+
+        const conversation =
+            getSavedConversation();
+
+
+        conversation.push({
+            role: role,
+            text: text,
+            timestamp: new Date().toISOString()
+        });
+
+
+        localStorage.setItem(
+            getConversationKey(),
+            JSON.stringify(conversation)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Conversation save error:",
+            error
+        );
+
+        setStatus(
+            "Hindi ma-save ang conversation sa browser."
+        );
+
+    }
+
+}
+
+
+function loadSavedConversation() {
+
+    const conversation =
+        getSavedConversation();
+
+
+    if (!conversation.length) {
+        return;
+    }
+
+
+    conversation.forEach(function(message) {
+
+        addMessage(
+            message.text,
+            message.role === "user"
+                ? "user-message"
+                : "ai-message"
+        );
+
+    });
+
+
+    setStatus(
+        `🐺 Na-load ang ${conversation.length} saved messages — Chapter ${currentChapter}`
+    );
+
+}
+
+
+function clearSavedConversation() {
+
+    const conversation =
+        getSavedConversation();
+
+
+    if (!conversation.length) {
+
+        setStatus(
+            "Walang saved conversation para sa chapter na ito."
+        );
+
+        return;
+
+    }
+
+
+    if (!window.confirm(
+        `Burahin ang saved conversation para sa Chapter ${currentChapter}?`
+    )) {
+        return;
+    }
+
+
+    localStorage.removeItem(
+        getConversationKey()
+    );
+
+
+    document.getElementById(
+        "chat"
+    ).innerHTML = "";
+
+
+    setStatus(
+        `Saved conversation cleared — Chapter ${currentChapter}`
+    );
+
+}
+
+
+function downloadConversation() {
+
+    const conversation =
+        getSavedConversation();
+
+
+    if (!conversation.length) {
+
+        setStatus(
+            "Walang conversation na mase-save."
+        );
+
+        return;
+
+    }
+
+
+    let output =
+        `AIWolf Conversation — Chapter ${currentChapter}\n`;
+
+    output +=
+        `Generated: ${new Date().toLocaleString()}\n`;
+
+    output +=
+        `${"=".repeat(55)}\n\n`;
+
+
+    conversation.forEach(function(message) {
+
+        const speaker =
+            message.role === "user"
+                ? "BATA"
+                : "AIWOLF";
+
+        output +=
+            `${speaker}:\n${message.text}\n\n`;
+
+    });
+
+
+    const blob =
+        new Blob(
+            [output],
+            { type: "text/plain;charset=utf-8" }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+        `AIWolf-Chapter-${currentChapter}-Conversation.txt`;
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+
+    setStatus(
+        "Conversation saved as a text file."
+    );
+
+}
+
+
+/*
+==================================================
+STATUS
+==================================================
+*/
+
+function setStatus(text) {
+
+    document.getElementById(
+        "aiwolfStatus"
+    ).textContent =
+        text;
+
+}
+
+
+/*
+==================================================
+SUGGESTED QUESTION
+==================================================
+*/
+
+function askSuggested(question) {
+
+    document.getElementById(
+        "questionInput"
+    ).value =
+        question;
+
+
+    sendQuestion();
+
+}
+
+
+/*
+==================================================
+SEND QUESTION TO AIWOLF
+==================================================
+*/
+
+async function sendQuestion() {
+
+    const input =
+        document.getElementById(
+            "questionInput"
+        );
+
+
+    const sendButton =
+        document.getElementById(
+            "sendButton"
+        );
+
+    /*
+------------------------------------------
+REQUIRE SIGN-IN BEFORE TALKING TO AIWOLF
+------------------------------------------
+*/
+
+const user =
+    parentAuth && parentAuth.currentUser;
+
+if (!user) {
+
+    setStatus(
+        "🔒 Please sign in first bago makausap si AIWolf."
+    );
+
+    return;
+
+}
+
+    const childId =
+    localStorage.getItem("activeChildId") || "";
+
+if (!childId) {
+
+    setStatus(
+        "👤 Walang napiling active child."
+    );
+
+    return;
+
+}
+
+    const question =
+        input.value.trim();
+
+
+    if (!question) {
+
+        return;
+
+    }
+
+
+    /*
+    Make sure chapter has loaded
+    */
+
+    if (!currentChapterText) {
+
+        setStatus(
+            "Hindi pa handa ang chapter."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    Display user's question
+    */
+
+    addMessage(
+        question,
+        "user-message"
+    );
+
+
+    saveConversationMessage(
+        "user",
+        question
+    );
+
+
+    /*
+    Clear input
+    */
+
+    input.value = "";
+
+
+    /*
+    Disable button
+    */
+
+    sendButton.disabled =
+        true;
+
+
+    setStatus(
+        "🐺 AIWolf is thinking..."
+    );
+
+
+    try {
+
+        /*
+        ------------------------------------------
+        EXISTING RENDER SERVER
+        ------------------------------------------
+        */
+
+        const idToken =
+    await user.getIdToken();
+
+const response =
+    await fetch(
+        "https://mychatbot-ct9m.onrender.com/api/aiwolf",
+        {
+
+            method: "POST",
+
+            headers: {
+                "Authorization":
+                    "Bearer " + idToken,
+
+                "Content-Type":
+                    "application/json"
+            },
+
+                    body: JSON.stringify({
+                         question:question,
+                         chapter:currentChapter,
+                         mode:currentMode,
+                         chapterText:currentChapterText,
+                         childId:childId
+
+                     })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+        
+        /*
+        ------------------------------------------
+        SERVER ERROR
+        ------------------------------------------
+        */
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                data.error ||
+                "AIWolf server error."
+            );
+
+        }
+
+
+        /*
+        ------------------------------------------
+        AIWOLF RESPONSE
+        ------------------------------------------
+        */
+
+        const aiReply =
+            data.reply ||
+            "Walang natanggap na sagot mula kay AIWolf.";
+
+
+        addMessage(
+            aiReply,
+            "ai-message"
+        );
+
+
+        saveConversationMessage(
+            "ai",
+            aiReply
+        );
+
+        /*
+------------------------------------------
+SAVE Q&A TO FIRESTORE FOR ACTIVE CHILD
+------------------------------------------
+*/
+
+
+
+const activeChildSelect =
+    document.getElementById("activeChildSelect");
+
+
+let firestoreStatus = "";
+
+if (!user) {
+    firestoreStatus =
+        "Hindi naka-sign in ang parent; hindi na-save sa Firestore.";
+
+} else if (!childId) {
+    firestoreStatus =
+        "Walang napiling active child; hindi na-save sa Firestore.";
+
+} else {
+    try {
+        const idToken = await user.getIdToken();
+
+        const saveUrl =
+            "https://mychatbot-ct9m.onrender.com/api/parent/children/" +
+            encodeURIComponent(childId) +
+            "/conversations";
+
+        const saveResponse = await fetch(saveUrl, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + idToken,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chapter: currentChapter,
+                question: question,
+                reply: aiReply
+            })
+        });
+
+        const saveData = await saveResponse.json();
+
+        if (!saveResponse.ok) {
+            throw new Error(
+                saveData.error ||
+                saveData.message ||
+                JSON.stringify(saveData) ||
+                "Hindi na-save sa Firestore."
+            );
+        }
+
+        firestoreStatus =
+            "Na-save ang conversation sa Firestore.";
+
+        console.log("Q&A saved to Firestore:", saveData);
+
+    } catch (saveError) {
+        console.error("Firestore save error:", saveError);
+
+        firestoreStatus =
+            "Hindi na-save sa Firestore: " + saveError.message;
+    }
+}
+
+setStatus(
+    "🐺 AIWolf — " + currentMode + " mode. " + firestoreStatus
+);
+
+    } catch (error) {
+
+        console.error(
+            "AIWolf request error:",
+            error
+        );
+
+
+        addMessage(
+            "Pasensya na. Nagkaroon ng problema habang sinasagot ang tanong.",
+            "ai-message"
+        );
+
+
+        setStatus(
+            `Error: ${error.message}`
+        );
+
+    } finally {
+
+        sendButton.disabled =
+            false;
+
+        input.focus();
+
+    }
+
+}
+
+
+/*
+==================================================
+ENTER KEY
+==================================================
+*/
+
+function handleInputKey(event) {
+
+    /*
+    Enter = send
+    Shift + Enter = bagong linya
+    */
+
+    if (
+        event.key === "Enter" &&
+        !event.shiftKey
+    ) {
+
+        event.preventDefault();
+
+        sendQuestion();
+
+    }
+
+}
+
+async function loadChildConversations() {
+
+    const user =
+        parentAuth && parentAuth.currentUser;
+
+    const activeChildSelect =
+        document.getElementById(
+            "activeChildSelect"
+        );
+
+    const conversationList =
+        document.getElementById(
+            "conversationList"
+        );
+
+    const chapterFilter =
+    document.getElementById(
+        "chapterFilter"
+    );
+
+    const status =
+        document.getElementById(
+            "conversationViewerStatus"
+        );
+
+    const childId =
+        activeChildSelect
+            ? activeChildSelect.value
+            : "";
+
+    if (!conversationList || !status) {
+        return;
+    }
+
+    conversationList.innerHTML = "";
+
+    if (!user) {
+
+        status.textContent =
+            "Mag-sign in muna bilang parent.";
+
+        return;
+    }
+
+    if (!childId) {
+
+        status.textContent =
+            "Pumili ng child para makita ang conversation history.";
+
+        return;
+    }
+
+    status.textContent =
+        "⏳ Loading conversation history...";
+
+    try {
+
+        const idToken =
+            await user.getIdToken();
+
+        const response =
+            await fetch(
+                "https://mychatbot-ct9m.onrender.com/api/parent/children/" +
+                encodeURIComponent(childId) +
+                "/conversations",
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " + idToken
+                    }
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Hindi ma-load ang conversation history."
+            );
+
+        }
+
+        const conversations =
+            data.conversations || [];
+
+        // POPULATE CHAPTER FILTER
+
+if (chapterFilter) {
+    const previousValue =
+        chapterFilter.value || "all";
+
+    chapterFilter.innerHTML =
+        '<option value="all">All chapters</option>';
+
+    const chapters = [
+        ...new Set(
+            conversations.map(
+                conversation =>
+                    Number(conversation.chapter)
+            )
+        )
+    ].filter(Number.isFinite).sort((a, b) => a - b);
+
+    chapters.forEach(chapterNumber => {
+        const option =
+            document.createElement("option");
+
+        option.value =
+            String(chapterNumber);
+
+        option.textContent =
+            "Chapter " + chapterNumber;
+
+        chapterFilter.appendChild(option);
+    });
+
+    if (
+        [...chapterFilter.options].some(
+            option => option.value === previousValue
+        )
+    ) {
+        chapterFilter.value = previousValue;
+    } else {
+        chapterFilter.value = "all";
+    }
+}      const selectedChapter =
+    chapterFilter
+        ? chapterFilter.value
+        : "all";
+
+const filteredConversations =
+    selectedChapter === "all"
+        ? conversations
+        : conversations.filter(
+            conversation =>
+                String(conversation.chapter) === selectedChapter
+        );
+
+        if (!filteredConversations.length) {
+            
+            status.textContent =
+                "Wala pang conversation ang child na ito.";
+
+            return;
+        }
+
+        status.textContent =
+    filteredConversations.length +
+    " conversation" +
+    (filteredConversations.length === 1
+        ? ""
+        : "s") +
+    " found.";
+
+        filteredConversations.forEach(
+    conversation => {
+
+                const card =
+    document.createElement("div");
+
+card.style.border =
+    "1px solid #ddd";
+
+card.style.borderRadius =
+    "14px";
+
+card.style.padding =
+    "16px";
+
+card.style.marginBottom =
+    "18px";
+
+card.style.backgroundColor =
+    "#ffffff";
+
+card.style.color =
+    "#222222";
+
+card.style.boxShadow =
+    "0 2px 6px rgba(0,0,0,0.06)";
+
+
+                // DATE / TIME
+
+                // HEADER
+
+const header =
+    document.createElement("div");
+
+header.style.marginBottom =
+    "12px";
+
+
+// CHAPTER
+
+const chapter =
+    document.createElement("strong");
+
+chapter.textContent =
+    "📖 Chapter " +
+    conversation.chapter;
+
+chapter.style.display =
+    "block";
+
+chapter.style.fontSize =
+    "16px";
+
+header.appendChild(
+    chapter
+);
+
+
+// DATE / TIME
+
+const date =
+    document.createElement("small");
+
+if (conversation.createdAt) {
+
+    const dateObject =
+        new Date(
+            conversation.createdAt
+        );
+
+    date.textContent =
+    "🕐 " +
+    dateObject.toLocaleDateString("en-PH", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    }) +
+    " • " +
+    dateObject.toLocaleTimeString("en-PH", {
+        hour: "numeric",
+        minute: "2-digit"
+    });
+
+} else {
+
+    date.textContent =
+        "🕐 Date unavailable";
+
+}
+
+date.style.color =
+    "#666666";
+
+header.appendChild(
+    date
+);
+
+card.appendChild(
+    header
+);
+
+                // COLLAPSIBLE CONVERSATION
+
+const conversationDetails =
+    document.createElement("details");
+
+const conversationSummary =
+    document.createElement("summary");
+
+conversationSummary.innerHTML =
+    '▶ <span class="eye-icon open-eye"></span> View conversation';
+
+conversationDetails.addEventListener(
+    "toggle",
+    function () {
+        if (conversationDetails.open) {
+            conversationSummary.textContent =
+                "▶ 👁️ Hide conversation";
+        } else {
+            conversationSummary.innerHTML =
+    '▼ <span class="eye-icon closed-eye"></span> View conversation';
+        }
+    }
+);
+
+conversationSummary.style.cursor =
+    "pointer";
+
+conversationSummary.style.fontWeight =
+    "bold";
+
+conversationSummary.style.color =
+    "#222222";
+
+conversationDetails.appendChild(
+    conversationSummary
+);
+
+                // CHILD QUESTION
+
+const questionSection =
+    document.createElement("div");
+
+questionSection.style.backgroundColor =
+    "#f0f6ff";
+
+questionSection.style.color =
+    "#222222";
+
+questionSection.style.borderRadius =
+    "10px";
+
+questionSection.style.padding =
+    "12px";
+
+questionSection.style.marginBottom =
+    "12px";
+
+const questionLabel =
+    document.createElement("strong");
+
+questionLabel.textContent =
+    "👧 Child's question";
+
+questionLabel.style.display =
+    "block";
+
+questionLabel.style.color =
+    "#222222";
+
+questionLabel.style.marginBottom =
+    "6px";
+
+const question =
+    document.createElement("p");
+
+question.textContent =
+    conversation.question || "";
+
+question.style.color =
+    "#222222";
+
+question.style.margin =
+    "0";
+
+questionSection.appendChild(questionLabel);
+questionSection.appendChild(question);
+
+conversationDetails.appendChild(
+    questionSection
+);
+
+
+// AIWOLF REPLY
+
+const replySection =
+    document.createElement("div");
+
+replySection.style.backgroundColor =
+    "#f3f8f1";
+
+replySection.style.color =
+    "#222222";
+
+replySection.style.borderRadius =
+    "10px";
+
+replySection.style.padding =
+    "12px";
+
+const replyLabel =
+    document.createElement("strong");
+
+replyLabel.textContent =
+    "🐺 AIWolf's answer";
+
+replyLabel.style.display =
+    "block";
+
+replyLabel.style.color =
+    "#222222";
+
+replyLabel.style.marginBottom =
+    "6px";
+
+const reply =
+    document.createElement("p");
+
+reply.textContent =
+    conversation.reply || "";
+
+reply.style.color =
+    "#222222";
+
+reply.style.margin =
+    "0";
+
+reply.style.whiteSpace =
+    "pre-wrap";
+
+replySection.appendChild(replyLabel);
+replySection.appendChild(reply);
+
+conversationDetails.appendChild(
+    replySection
+);
+
+                card.appendChild(
+    conversationDetails
+);
+
+// ADD CARD TO THE VIEWER
+
+conversationList.appendChild(card);
+
+            }
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Load conversations error:",
+            error
+        );
+
+        status.textContent =
+            "Hindi ma-load ang conversation history: " +
+            error.message;
+
+    }
+}
+
+    document
+    .getElementById("activeChildSelect")
+    .addEventListener(
+        "change",
+        loadChildConversations
+    );
+
+    document
+    .getElementById("activeChildSelect")
+    .addEventListener(
+        "change",
+        function () {
+            const childId = this.value;
+
+            if (childId) {
+                localStorage.setItem(
+                    "activeChildId",
+                    childId
+                );
+            } else {
+                localStorage.removeItem(
+                    "activeChildId"
+                );
+            }
+        }
+    );
+
+    const refreshConversationButton =
+    document.getElementById("refreshConversationButton");
+
+if (refreshConversationButton) {
+    refreshConversationButton.addEventListener(
+        "click",
+        loadChildConversations
+    );
+}
+
+    const chapterFilter =
+    document.getElementById("chapterFilter");
+
+if (chapterFilter) {
+    chapterFilter.addEventListener(
+        "change",
+        loadChildConversations
+    );
+}
+
+/*
+==================================================
+START
+==================================================
+*/
+
+loadChapter();
+
+</script>
+
+
+</body>
+</html>
