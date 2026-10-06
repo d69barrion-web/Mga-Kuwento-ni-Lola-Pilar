@@ -73,7 +73,7 @@ Ang mausisang isip ay hindi basta tinatanggap ang mundo kung ano lamang ito sa u
 Mas malalim itong tumitingin.
 
 ---
-<img src="images/Chapter1/lobo_kagubatan.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/lobo_bata.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 ### 🐺 ANG LOBO AY HINDI BASTA SUMUSUNOD
 
