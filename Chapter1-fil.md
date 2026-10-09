@@ -250,7 +250,7 @@ Maaaring baguhin ng simpleng tanong na iyon ang lahat.
 ---
 
 # 🐺 HAMON NG LOBO
-<img src="images/Chapter1/hamon_lobo.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/hamon.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 Sa susunod na pitong araw, pansinin kung gaano kadalas mong marinig ang mga katagang ito:
 
