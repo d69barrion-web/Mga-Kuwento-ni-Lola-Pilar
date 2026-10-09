@@ -223,7 +223,7 @@ sa:
 
 # PAG-ISIPAN MO
 
-<img src="images/Chapter1/lobo_tupa.png" style="width: 100%; max-width: 300px; height: auto;">
+<img src="Images/pag-isipan _mo.jpg" style="width: 100%; max-width: 300px; height: auto;">
 
 Isipin mong lahat ng kaibigan mo ay nagsasabing:
 
